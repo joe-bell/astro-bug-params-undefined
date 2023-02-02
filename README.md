@@ -1,4 +1,23 @@
-### Without `undefined` `params`
+# Astro Bug Reproduction
+
+## Description
+
+This repo is a reproduction; two routes have been created for demo purposes:
+
+- src/example/[...slug].ts
+- src/api/example/[...slug].ts
+
+## Expectation
+
+When using `params` in a `getStaticPaths` function, I would expect `undefined` to result in the creation of an index route.
+
+## Actual Behaviour
+
+The build fails in Vercel
+
+### Success: Without `undefined` `params`
+
+- Deployment: https://vercel.com/joebell/astro-bug-params-undefined/4G9AqahtnJTsvXzCP6Z97H55ze73
 
 ```sh
 19:36:18.324	▶ src/pages/example/[...slug].astro
@@ -12,7 +31,25 @@
 19:36:18.351	Completed in 59ms.
 ```
 
-### With `undefined` `params`
+### Error: With `undefined` `params`
+
+- Deployment: https://vercel.com/joebell/astro-bug-params-undefined/Fj1im5wqsKA6XdVn2VhGkWrkSFja
+
+```sh
+▶ src/pages/example/[...slug].astro
+19:39:10.815	  ├─ /example/one/index.html (+18ms)
+19:39:10.817	  ├─ /example/two/index.html (+19ms)
+19:39:10.818	  ├─ /example/three/index.html (+21ms)
+19:39:10.820	  └─ /example/index.html (+22ms)
+19:39:10.820	λ src/pages/api/example/[...slug].ts
+19:39:10.821	  ├─ /api/example/one (+1ms)
+19:39:10.822	  ├─ /api/example/two (+2ms)
+19:39:10.822	  ├─ /api/example/three (+3ms)
+19:39:10.911	 error   EISDIR: illegal operation on a directory, open '/vercel/path0/.vercel/output/static/api/example'
+19:39:10.911	Error: EISDIR: illegal operation on a directory, open '/vercel/path0/.vercel/output/static/api/example'
+19:39:10.926	 ELIFECYCLE  Command failed with exit code 1.
+19:39:10.940	Error: Command "pnpm run build" exited with 1
+```
 
 ---
 
