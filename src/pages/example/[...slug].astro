@@ -2,7 +2,7 @@
 export const prerender = true;
 
 export function getStaticPaths() {
-  const slugs = ["one", "two", "three", undefined];
+  const slugs = ["one", "two", "three", "index"];
 
   return slugs.map((u) => ({ params: { slug: u } }));
 }
