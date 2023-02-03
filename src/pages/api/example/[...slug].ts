@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-const slugs = ["one", "two", "three", undefined];
+const slugs = ["one", "two", "three", "index"];
 
 export const prerender = true;
 
